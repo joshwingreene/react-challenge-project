@@ -78,11 +78,11 @@ class ViewOrders extends Component {
         .catch(error => console.error(error));
     }
 
-    menuItemChosen = (event) => {
+    handleEditModeMenuItemChange = (event) => {
         this.setState({ order_being_edited: { ...this.state.order_being_edited, order_item: event.target.value }});
     }
 
-    menuQuantityChosen = (event) => {
+    handleEditModeMenuQuantityChange = (event) => {
         this.setState({ order_being_edited: { ...this.state.order_being_edited, quantity: event.target.value }});
     }
 
@@ -110,8 +110,8 @@ class ViewOrders extends Component {
                                      { this.state.is_editing_order && this.state.order_being_edited._id === order._id ?
                                         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                                             <h4>Edit Order</h4>
-                                            <MenuItemSelector defaultValue="Lunch menu" menuOptions={ MENU_ITEMS } order_item={ this.state.order_being_edited.order_item } menuItemChosen={ this.menuItemChosen } />
-                                            <QuantitySelector quantity={ this.state.order_being_edited.quantity } quantityValueLimiter={QUANTITY_VALUE_LIMITER} menuQuantityChosen= { this.menuQuantityChosen } />
+                                            <MenuItemSelector defaultValue="Lunch menu" menuOptions={ MENU_ITEMS } order_item={ this.state.order_being_edited.order_item } menuItemChosen={ this.handleEditModeMenuItemChange } />
+                                            <QuantitySelector quantity={ this.state.order_being_edited.quantity } quantityValueLimiter={QUANTITY_VALUE_LIMITER} menuQuantityChosen= { this.handleEditModeMenuQuantityChange } />
                                             <div style={{ marginTop: 5 }}>
                                                 <button onClick={() => this.updateOrder()}>Update</button>
                                                 <button onClick={() => this.toggleEditing(order)}>Cancel</button>
